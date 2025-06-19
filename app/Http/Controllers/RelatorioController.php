@@ -8,25 +8,39 @@ use Illuminate\Http\Request;
 class RelatorioController extends Controller
 {
     // Relatório 1: Quantidade de alunos
-    public function alunosPorCurso()
+    public function alunosPorCurso(Request $request)
     {
-        $dados = Curso::withCount('alunos')
-            ->orderBy('nome')
-            ->get();
+        $porPagina = $request->input('por_pagina', 10);
+        $busca = $request->input('busca');
 
-        return view('relatorios.alunos-por-curso', compact('dados'));
+        $query = Curso::withCount('alunos')->orderBy('nome');
+
+        if ($busca) {
+            $query->where('nome', 'like', '%' . $busca . '%');
+        }
+
+        $dados = $query->paginate($porPagina)->withQueryString();
+
+        return view('relatorios.alunos-por-curso', compact('dados', 'porPagina', 'busca'));
     }
 
     // Relatório 2: Listagem de alunos
-    public function listagemAlunos()
+    public function listagemAlunos(Request $request)
     {
-        $cursos = Curso::with(['alunos' => function ($query) {
-            $query->orderBy('nome');
-        }])
-        ->orderBy('nome')
-        ->get();
+        $porPagina = $request->input('por_pagina', 5);
+        $busca = $request->input('busca');
 
-        return view('relatorios.listagem-alunos', compact('cursos'));
+        $query = Curso::with(['alunos' => function ($query) {
+            $query->orderBy('nome');
+        }])->orderBy('nome');
+
+        if ($busca) {
+            $query->where('nome', 'like', '%' . $busca . '%');
+        }
+
+        $cursos = $query->paginate($porPagina)->withQueryString();
+
+        return view('relatorios.listagem-alunos', compact('cursos', 'porPagina', 'busca'));
     }
 }
 
