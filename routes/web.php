@@ -7,12 +7,8 @@ use App\Http\Controllers\AlunoController;
 use App\Http\Controllers\RelatorioController;
 
 Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return redirect()->route('alunos.index');
+})->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -23,8 +19,10 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::resource('cursos', CursoController::class);
     Route::resource('alunos', AlunoController::class);
-    Route::get('/relatorios/alunos-por-curso', [RelatorioController::class, 'alunosPorCurso'])->name('relatorios.alunos_por_curso');
-    Route::get('/relatorios/listagem-alunos', [RelatorioController::class, 'listagemAlunos'])->name('relatorios.listagem_alunos');
+    Route::get('/relatorios/alunos-por-curso', [RelatorioController::class, 'alunosPorCurso'])
+        ->name('relatorios.alunos-por-curso');
+    Route::get('/relatorios/listagem-alunos', [RelatorioController::class, 'listagemAlunos'])
+        ->name('relatorios.listagem-alunos');
 });
 
 require __DIR__.'/auth.php';

@@ -10,9 +10,11 @@ class RelatorioController extends Controller
     // Relatório 1: Quantidade de alunos
     public function alunosPorCurso()
     {
-        $dados = Curso::withCount('alunos')->get();
+        $dados = Curso::withCount('alunos')
+            ->orderBy('nome')
+            ->get();
 
-        return view('relatorios.alunos_por_curso', compact('dados'));
+        return view('relatorios.alunos-por-curso', compact('dados'));
     }
 
     // Relatório 2: Listagem de alunos
@@ -20,9 +22,11 @@ class RelatorioController extends Controller
     {
         $cursos = Curso::with(['alunos' => function ($query) {
             $query->orderBy('nome');
-        }])->get();
+        }])
+        ->orderBy('nome')
+        ->get();
 
-        return view('relatorios.listagem_alunos', compact('cursos'));
+        return view('relatorios.listagem-alunos', compact('cursos'));
     }
 }
 

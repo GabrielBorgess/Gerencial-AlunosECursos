@@ -63,7 +63,7 @@
                             value="{{ old('endereco') }}" required>
                     </div>
 
-                    <div class="flex justify-end space-x-2">
+                    <div class="flex justify-end space-x-2 items-center">
                         <a href="{{ route('alunos.index') }}"
                             class="text-gray-600 hover:underline">Cancelar</a>
                         <button type="submit"
