@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 
 class AlunoController extends Controller
 {
+    private const DEFAULT_PER_PAGE = 5;
+
     public function index(Request $request)
     {
         $query = Aluno::with('curso');
@@ -24,7 +26,9 @@ class AlunoController extends Controller
             $query->where('curso_id', $request->curso_id);
         }
 
-        $alunos = $query->paginate(5);
+        $porPagina = $request->input('por_pagina', self::DEFAULT_PER_PAGE);
+
+        $alunos = $query->paginate($porPagina)->appends($request->query());
 
         $cursos = Curso::all();
 

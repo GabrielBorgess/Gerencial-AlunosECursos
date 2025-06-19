@@ -17,12 +17,12 @@
             {{-- Filtros --}}
             <form method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
                 <input type="text" name="matricula" value="{{ request('matricula') }}" placeholder="Matrícula"
-                    class="border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+                    class="border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
 
                 <input type="text" name="nome" value="{{ request('nome') }}" placeholder="Nome"
-                    class="border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+                    class="border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
 
-                <select name="curso_id" class="border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+                <select name="curso_id" class="border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
                     <option value="">Todos os Cursos</option>
                     @foreach($cursos as $curso)
                         <option value="{{ $curso->id }}" @selected(request('curso_id') == $curso->id)>
@@ -31,8 +31,22 @@
                     @endforeach
                 </select>
 
-                <button type="submit"
-                    class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Filtrar</button>
+                <div class="flex items-center gap-4">
+                    <button type="submit"
+                        class="flex-1 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700">Filtrar</button>
+                    
+                    <div class="flex items-center gap-2">
+                        <label for="por_pagina" class="text-sm text-gray-700 dark:text-gray-300">Por página:</label>
+                        <select name="por_pagina" id="por_pagina" onchange="this.form.submit()"
+                            class="w-20 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200">
+                            @foreach([5, 10, 20, 50] as $opcao)
+                                <option value="{{ $opcao }}" @selected(request('por_pagina', 5) == $opcao)>
+                                    {{ $opcao }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </form>
 
             <div class="flex justify-end mb-4">

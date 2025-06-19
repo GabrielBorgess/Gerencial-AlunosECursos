@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateCursoRequest;
 
 class CursoController extends Controller
 {
+    private const DEFAULT_PER_PAGE = 5;
+
     public function index(Request $request)
     {
         $query = Curso::query();
@@ -21,7 +23,12 @@ class CursoController extends Controller
             $query->where('nome', 'like', "%{$request->nome}%");
         }
 
-        $cursos = $query->orderBy('nome')->paginate(5)->withQueryString();
+        $porPagina = $request->input('por_pagina', self::DEFAULT_PER_PAGE);
+        $porPagina = in_array($porPagina, [5, 10, 20, 50]) ? $porPagina : self::DEFAULT_PER_PAGE;
+
+        $cursos = $query->orderBy('nome')
+            ->paginate($porPagina)
+            ->withQueryString();
 
         return view('cursos.index', compact('cursos'));
     }
