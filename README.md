@@ -72,7 +72,3 @@ Sistema web para gerenciamento de cursos, alunos e relatórios, desenvolvido em 
 ```bash
 php artisan test
 ```
-
-## 📄 Licença
-
-MIT
