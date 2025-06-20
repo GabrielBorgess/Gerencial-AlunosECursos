@@ -5,7 +5,7 @@ Sistema web para gerenciamento de cursos, alunos e relatórios, desenvolvido em 
 ## Links
 
 - [Documentação da API](https://documenter.getpostman.com/view/32693779/2sB2xBCpMR)
-- [Apresentação no YouTube]()
+- [Apresentação no YouTube](https://www.youtube.com/watch?v=l03f25wY7qg)
 
 ## Funcionalidades
 
