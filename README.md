@@ -2,8 +2,10 @@
 
 Sistema web para gerenciamento de cursos, alunos e relatórios, desenvolvido em Laravel.
 
-[![Documentação da API](https://web.postman.co/documentation/32693779-17d778d1-3baf-4b9e-8a91-5fa2f398ffb0/publish?workspaceId=130c91e1-55ac-43af-80b7-313305a22b3d)
-[![Apresentação no YouTube]()
+## Links
+
+- [Documentação da API](https://documenter.getpostman.com/view/32693779/2sB2xBCpMR)
+- [Apresentação no YouTube]()
 
 ## Funcionalidades
 
