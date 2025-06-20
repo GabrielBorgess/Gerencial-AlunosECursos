@@ -65,7 +65,7 @@ Sistema web para gerenciamento de cursos, alunos e relatórios, desenvolvido em 
    ```
 
 7. **Acesse em:**  
-   [http://localhost:8000](http://localhost:8000)
+   [http://localhost:8000/register](http://localhost:8000/register)
 
 ##  Rodando os testes
 
